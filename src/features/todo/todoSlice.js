@@ -25,6 +25,7 @@ export const todoSlice = createSlice({
     });
     builder.addCase(fetchTodos.rejected, (state, action) => {
       state.status = "error";
+      state.data = [];
       state.statusText = action.error.message;
     });
     builder.addCase(addTodo.fulfilled, (state, action) => {
@@ -36,9 +37,19 @@ export const todoSlice = createSlice({
     });
 
     builder.addCase(updateTodo.fulfilled, (state, action) => {
-      state.data = state.data.map((todo) =>
-        todo.id === action.payload.id ? action.payload : todo
-      );
+      const updatedTodo = action.payload;
+
+      const index = state.data.findIndex((todo) => todo.id === updatedTodo.id);
+
+      if (index !== -1) {
+        const newData = [...state.data];
+        newData[index] = updatedTodo;
+
+        state.data = newData;
+      }
+
+      state.status = "idle";
+
       toast.update(toastId, {
         render: "Updated Successfully",
         type: "success",
@@ -46,6 +57,7 @@ export const todoSlice = createSlice({
         autoClose: 1000,
       });
     });
+
     builder.addCase(deleteTodo.pending, (state, action) => {
       toast.loading("Deleting Todo", { toastId: toastId });
     });

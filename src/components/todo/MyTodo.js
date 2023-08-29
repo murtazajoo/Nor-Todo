@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectTodos } from "../../features/todo/todoSlice";
 import AddTodo from "./AddTodo";
@@ -14,11 +14,12 @@ function MyTodo() {
     status: fetchStatus,
     statusText: fetchStatusText,
     data: todos,
-    updateStatus,
   } = useSelector(selectTodos);
 
-  //filter todos to show only userTodos
-  const userTodos = todos.filter((todo) => todo.user_id === user.id);
+  const userTodos = useMemo(
+    () => todos.filter((todo) => todo.user_id === user.id),
+    [user, todos]
+  );
 
   return (
     <div className="px-5 max-w-[1440px] m-auto">
