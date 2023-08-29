@@ -9,12 +9,20 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { Provider } from "react-redux";
+import store from "./app/store";
+import supabase from "./supabase";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <SessionContextProvider supabaseClient={supabase}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </SessionContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
