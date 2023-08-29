@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { selectTodos } from "../features/todo/todoSlice";
-import AddTodo from "../components/todo/AddTodo";
+import { selectTodos } from "../../features/todo/todoSlice";
+import AddTodo from "./AddTodo";
 
-import Todos from "../components/todo/Todos";
-import { Badge, Box, Button } from "@mui/material";
-import { getUser } from "../features/user/userSlice";
+import Todos from "./Todos";
+import { Badge, Box, Button, Typography } from "@mui/material";
+import { getUser } from "../../features/user/userSlice";
 
 function MyTodo() {
   const [isAddTodo, setIsAddTodo] = useState(false);
@@ -23,13 +23,17 @@ function MyTodo() {
   return (
     <div className="px-5 max-w-[1440px] m-auto">
       <Button
-        sx={{ my: 5 }}
+        sx={{ my: 5, padding: "20px 50px" }}
         variant="contained"
+        size="large"
         onClick={() => setIsAddTodo(true)}
-        className="my-5"
       >
         Add Todo
       </Button>
+      <Typography variant="body2" sx={{ mb: 4 }} className="text-slate-600">
+        Your Todo's both public and private
+      </Typography>
+
       <AddTodo isAddTodo={isAddTodo} setIsAddTodo={setIsAddTodo} />
       {fetchStatus === "loading" ? (
         <div>Loading...</div>

@@ -40,14 +40,14 @@ function Navbar() {
         {user && (
           <>
             {" "}
-            <li>
+            {/* <li>
               <NavLink
                 className={"p-1 px-3 rounded border border-transparent"}
                 to="/mytodo"
               >
                 My-Todos
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <button className="uppercase" onClick={logout}>
                 Logout

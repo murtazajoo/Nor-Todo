@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import MyTodo from "./pages/MyTodo";
+import MyTodo from "./components/todo/MyTodo";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import store from "./app/store";
@@ -20,7 +20,7 @@ store.dispatch(fetchTodos());
 function App() {
   const user = useUser();
   return (
-    <div className="App bg-slate-950 min-h-[100vh] text-slate-100">
+    <div className="App bg-slate-950 min-h-[100vh] text-slate-100 pb-20">
       <header className="App-header">
         <Navbar />
         <Routes>

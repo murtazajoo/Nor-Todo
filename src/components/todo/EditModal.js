@@ -6,6 +6,8 @@ import { Button, TextField, TextareaAutosize } from "@mui/material";
 import { BasicSwitch } from "./Switch";
 import { useDispatch } from "react-redux";
 import { updateTodo } from "../../features/todo/todoSlice";
+import { toast } from "react-toastify";
+import { MedicalServicesSharp } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -13,8 +15,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   maxWidth: 600,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   maxHeight: "100vh",
   p: 4,
@@ -49,21 +49,35 @@ export default function EditModal({ todo, setEditTodo }) {
   }
 
   function handleSave() {
+    if (updatedTodo.title == "" || updatedTodo.body == "")
+      return toast.warn("Some fields are empty", { autoClose: 1000 });
+    if (updatedTodo.title.length > 30) {
+      return toast.warn("Title is too long", { autoClose: 1000 });
+    }
+    if (updatedTodo.body.length > 300) {
+      return toast.warn("Description is too long ( > 300 )", {
+        autoClose: 1000,
+      });
+    }
     dispatch(updateTodo(updatedTodo));
     setEditTodo(null);
   }
 
   return (
-    <div>
+    <>
       <Modal
         open={todo !== null}
         onClose={() => setEditTodo(null)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-modal-Edit"
+        aria-describedby="modal-modal-Edit"
+        style={{
+          backdropFilter: "blur(2px)",
+          backgroundColor: "rgba(247, 118, 50,0.1)",
+        }}
       >
         <Box
           sx={style}
-          className="flex flex-col text-left w-full gap-5 rounded-3xl"
+          className="flex flex-col text-left w-full gap-5 rounded-3xl bg-rose-100"
         >
           <Typography
             id="modal-modal-title"
@@ -86,7 +100,7 @@ export default function EditModal({ todo, setEditTodo }) {
             name="body"
             onChange={handleBodyChange}
             value={updatedTodo.body}
-            className="border border-slate-400 p-2 py-4 rounded-lg"
+            className="border border-slate-400 p-2 py-4 rounded-lg bg-transparent"
           />
 
           <Typography
@@ -108,6 +122,6 @@ export default function EditModal({ todo, setEditTodo }) {
           </Box>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }

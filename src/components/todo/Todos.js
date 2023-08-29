@@ -34,7 +34,11 @@ function Todos({ todos }) {
       {todos &&
         todos.map((todo) => (
           <div
-            className=" bg-sky-800 bg-opacity-40 rounded-2xl p-5 h-fit"
+            className={` ${
+              TailWindBgRandomClasses[
+                Math.floor(Math.random() * TailWindBgRandomClasses.length)
+              ]
+            } bg-opacity-40 rounded-2xl p-5 h-fit`}
             key={todo.id}
           >
             <Typography variant="h4" className="">
@@ -87,14 +91,22 @@ function Todos({ todos }) {
                 </div>
               )}
             </div>
-            {/* {todo.public && <Reactions />} */}
-            {editTodo && (
-              <EditModal todo={editTodo} setEditTodo={setEditTodo} />
-            )}
+            {todo.public && <Reactions todo={todo} />}
           </div>
         ))}
+      {editTodo && <EditModal todo={editTodo} setEditTodo={setEditTodo} />}
     </div>
   );
 }
+
+const TailWindBgRandomClasses = [
+  //some tailwind classes of different colors with -800
+  "bg-sky-800",
+  "bg-rose-800",
+  "bg-violet-800",
+  "bg-lime-800",
+  "bg-amber-800",
+  "bg-emerald-800",
+];
 
 export default Todos;

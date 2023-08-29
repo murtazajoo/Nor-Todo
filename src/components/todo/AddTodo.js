@@ -6,6 +6,7 @@ import { Button, TextField, TextareaAutosize } from "@mui/material";
 import { BasicSwitch } from "./Switch";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../../features/todo/todoSlice";
+import { toast } from "react-toastify";
 
 const style = {
   position: "absolute",
@@ -13,9 +14,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   maxWidth: 600,
-  // bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
   p: 4,
 };
 
@@ -50,6 +48,14 @@ export default function EditModal({ isAddTodo, setIsAddTodo }) {
   }
 
   function handleSave() {
+    if (newTodo.title == "" || newTodo.body == "")
+      return toast.warn("Some fields are empty", { autoClose: 1000 });
+    if (newTodo.title.length > 30) {
+      return toast.warn("Title is too long", { autoClose: 1000 });
+    }
+    if (newTodo.body.length > 300) {
+      return toast.warn("Description is too long (>300)", { autoClose: 1000 });
+    }
     dispatch(addTodo(newTodo));
     setNewTodo(initial);
     setIsAddTodo(null);
@@ -62,10 +68,14 @@ export default function EditModal({ isAddTodo, setIsAddTodo }) {
         onClose={() => setIsAddTodo(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        style={{
+          backdropFilter: "blur(2px)",
+          backgroundColor: "rgb(22 ,163, 174, 0.2)",
+        }}
       >
         <Box
           sx={style}
-          className="flex flex-col text-left w-full gap-5 rounded-3xl bg-slate-200"
+          className="flex flex-col text-left w-full max-h-[100vh] gap-5 rounded-3xl bg-green-50"
         >
           <Typography
             id="modal-modal-title"
@@ -76,6 +86,7 @@ export default function EditModal({ isAddTodo, setIsAddTodo }) {
             Add Todo
           </Typography>
           <TextField
+            required
             value={newTodo.title}
             id="outlined-basic"
             name="title"
@@ -85,6 +96,7 @@ export default function EditModal({ isAddTodo, setIsAddTodo }) {
           />
 
           <TextareaAutosize
+            required
             placeholder="Description"
             name="body"
             onChange={handleBodyChange}
