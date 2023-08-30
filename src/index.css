@@ -11,3 +11,7 @@
 .active {
   @apply border-sky-500 text-sky-500;
 }
+
+.description a {
+  @apply text-sky-500;
+}

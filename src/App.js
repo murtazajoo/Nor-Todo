@@ -9,10 +9,11 @@ import { fetchTodos, selectTodos } from "./features/todo/todoSlice";
 import { fetchUser } from "./features/user/userSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import PublicTodo from "./pages/PublicTodos";
 import PageNotFound from "./pages/PageNotFound";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import About from "./pages/About";
+import Explore from "./pages/Explore";
 
 store.dispatch(fetchUser());
 store.dispatch(fetchTodos());
@@ -32,11 +33,12 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/publictodo" element={<PublicTodo />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/auth/*">
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
           </Route>
+          <Route path="/about" element={<About />}></Route>
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

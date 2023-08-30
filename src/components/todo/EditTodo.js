@@ -7,7 +7,6 @@ import { BasicSwitch } from "../../utils/Switch";
 import { useDispatch } from "react-redux";
 import { updateTodo } from "../../features/todo/todoSlice";
 import { toast } from "react-toastify";
-import { MedicalServicesSharp } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -49,7 +48,7 @@ export default function EditTodo({ todo, setEditTodo }) {
   }
 
   function handleSave() {
-    if (updatedTodo.title == "" || updatedTodo.body == "")
+    if (updatedTodo.title === "" || updatedTodo.body === "")
       return toast.warn("Some fields are empty", { autoClose: 1000 });
     if (updatedTodo.title.length > 30) {
       return toast.warn("Title is too long", { autoClose: 1000 });

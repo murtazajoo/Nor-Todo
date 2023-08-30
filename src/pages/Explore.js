@@ -4,9 +4,15 @@ import TodosList from "../components/todo/TodosList";
 import { selectTodos } from "../features/todo/todoSlice";
 import { Typography } from "@mui/material";
 
-function PublicTodo() {
+function Explore() {
   const { status, data } = useSelector(selectTodos);
   const publicTodos = data.filter((todo) => todo.public);
+
+  const contributingTodo = publicTodos.find((todo) => todo.id === 59);
+  if (contributingTodo) {
+    publicTodos.splice(publicTodos.indexOf(contributingTodo), 1);
+    publicTodos.unshift(contributingTodo);
+  }
 
   return (
     <div className="p-5 max-w-[1440px] m-auto">
@@ -23,4 +29,4 @@ function PublicTodo() {
   );
 }
 
-export default PublicTodo;
+export default Explore;

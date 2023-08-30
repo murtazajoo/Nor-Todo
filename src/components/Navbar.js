@@ -32,29 +32,28 @@ function Navbar() {
         <li>
           <NavLink
             className={"p-1 px-3 rounded border border-transparent"}
-            to="/publictodo"
+            to="/explore"
           >
             Explore
           </NavLink>
         </li>
         {user && (
           <>
-            {" "}
-            {/* <li>
-              <NavLink
-                className={"p-1 px-3 rounded border border-transparent"}
-                to="/mytodo"
-              >
-                My-Todos
-              </NavLink>
-            </li> */}
             <li>
               <button className="uppercase" onClick={logout}>
                 Logout
               </button>
             </li>
           </>
-        )}
+        )}{" "}
+        <li>
+          <NavLink
+            className={"p-1 px-3 rounded border border-transparent"}
+            to="/about"
+          >
+            About
+          </NavLink>
+        </li>
       </ul>
       {user && user ? (
         <Box className="flex justify-center items-start gap-3">

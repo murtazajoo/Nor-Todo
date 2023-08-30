@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box, Divider, ToggleButton, Typography } from "@mui/material";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteTodo, updateTodo } from "../../features/todo/todoSlice";
 import Reactions from "./Reactions";
 import { getUser } from "../../features/user/userSlice";
+import ReactLinkify from "react-linkify";
+import PushPinIcon from "@mui/icons-material/PushPin";
 
 const Todo = React.memo(({ todo, setEditTodo }) => {
   const user = useSelector(getUser);
   const dispatch = useDispatch();
+  const todoRef = useRef();
 
   function toggleCompeleted(todo) {
     dispatch(
@@ -22,27 +25,41 @@ const Todo = React.memo(({ todo, setEditTodo }) => {
   }
   function handleDelete(todoId) {
     if (window.confirm("Are you sure you want to delete this todo?")) {
-      dispatch(deleteTodo(todoId));
+      todoRef.current.classList.add("rotate-scale-down");
+      setTimeout(() => {
+        todoRef.current.classList.add("opacity-0");
+        dispatch(deleteTodo(todoId));
+      }, 300);
     }
   }
+  const index = Math.floor(Math.random() * TailWindBgRandomClasses.length);
+
   return (
     <>
       <div
-        className={` ${
-          TailWindBgRandomClasses[
-            Math.floor(Math.random() * TailWindBgRandomClasses.length)
-          ]
-        } bg-opacity-40 rounded-2xl p-5 h-fit`}
+        ref={todoRef}
+        className={` ${TailWindBgRandomClasses[index]} swing-bottom-right-bck bg-opacity-40 rounded-2xl p-5 h-fit`}
         key={todo.id}
       >
-        <Typography variant="h4" className="">
+        {todo.id === 59 && (
+          <div className="absolute bg-rose-800 px-2 pr-4 uppercase rounded-full top-0 left-1/2 transform -rotate-[0deg] -translate-x-1/2 -translate-y-1/2">
+            <PushPinIcon sx={{ color: "#379aff" }} /> pinned
+          </div>
+        )}
+
+        <Typography variant="h4" sx={{ mb: 1 }}>
           {todo.title}
         </Typography>
         <Typography
           variant="body2"
-          className="text-md text-slate-400 break-words whitespace-wrap"
+          className="text-md description whitespace-pre-wrap w-100%  text-slate-400 break-words "
         >
-          {todo.body}
+          <ReactLinkify className="whitespace-pre">
+            {todo.body
+              .split("\n")
+              .filter((line) => line.trim() !== "")
+              .join("\n")}
+          </ReactLinkify>
         </Typography>
         <Divider
           variant="middle"

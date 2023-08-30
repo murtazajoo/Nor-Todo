@@ -103,6 +103,9 @@ export default function EditModal({ isAddTodo, setIsAddTodo }) {
             value={newTodo.body}
             className="border border-slate-400 p-2 py-4 rounded-lg bg-transparent"
           />
+          <p class="text-slate-400 text-xs">
+            You can also insert url in the todo description now.
+          </p>
 
           <Typography
             id="modal-modal-description"
