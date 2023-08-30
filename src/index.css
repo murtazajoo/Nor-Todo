@@ -15,3 +15,17 @@
 .description a {
   @apply text-sky-500;
 }
+
+.todo-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.todo-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffffff1f;
+  border-radius: 100px;
+}
+
+.todo-scrollbar::-webkit-scrollbar-track {
+  background-color: #edf2f70f;
+  border-radius: 100px;
+}

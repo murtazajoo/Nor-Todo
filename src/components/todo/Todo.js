@@ -52,7 +52,7 @@ const Todo = React.memo(({ todo, setEditTodo }) => {
         </Typography>
         <Typography
           variant="body2"
-          className="text-md description whitespace-pre-wrap w-100%  text-slate-400 break-words "
+          className="max-h-[200px] overflow-auto todo-scrollbar pr-1 text-md description whitespace-pre-wrap w-100%  text-slate-400 break-words "
         >
           <ReactLinkify className="whitespace-pre">
             {todo.body
