@@ -47,7 +47,11 @@ const Todo = React.memo(({ todo, setEditTodo }) => {
           </div>
         )}
 
-        <Typography variant="h4" sx={{ mb: 1 }}>
+        <Typography
+          variant="h4"
+          className="whitespace-wrap break-words"
+          sx={{ mb: 1 }}
+        >
           {todo.title}
         </Typography>
         <Typography
