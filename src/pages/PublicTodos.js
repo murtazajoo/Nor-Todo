@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import Todos from "../components/todo/Todos";
+import TodosList from "../components/todo/TodosList";
 import { selectTodos } from "../features/todo/todoSlice";
 import { Typography } from "@mui/material";
 
@@ -17,7 +17,7 @@ function PublicTodo() {
       {status === "loading" ? (
         <div>Loading...</div>
       ) : (
-        <Todos todos={publicTodos} />
+        <TodosList todos={publicTodos} />
       )}
     </div>
   );

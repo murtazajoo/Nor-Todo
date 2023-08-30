@@ -42,7 +42,7 @@ function App() {
         </Routes>
       </header>
       <ToastContainer />
-      <audio ref={audioRef} className="audio-element" on>
+      <audio ref={audioRef} className="audio-element">
         <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_6634b0add4.mp3"></source>
       </audio>
     </div>

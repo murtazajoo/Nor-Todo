@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button, TextField, TextareaAutosize } from "@mui/material";
-import { BasicSwitch } from "./Switch";
+import { BasicSwitch } from "../../utils/Switch";
 import { useDispatch } from "react-redux";
 import { updateTodo } from "../../features/todo/todoSlice";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ const style = {
   p: 4,
 };
 
-export default function EditModal({ todo, setEditTodo }) {
+export default function EditTodo({ todo, setEditTodo }) {
   const dispatch = useDispatch();
   const [updatedTodo, setUpdatedTodo] = React.useState({
     ...todo,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Chip, Divider, ToggleButton, Typography } from "@mui/material";
+import { Box, Divider, ToggleButton, Typography } from "@mui/material";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CheckIcon from "@mui/icons-material/Check";

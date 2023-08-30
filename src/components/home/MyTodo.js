@@ -1,10 +1,10 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectTodos } from "../../features/todo/todoSlice";
-import AddTodo from "./AddTodo";
+import AddTodo from "../todo/AddTodo";
 
-import Todos from "./Todos";
-import { Badge, Box, Button, Typography } from "@mui/material";
+import TodosList from "../todo/TodosList";
+import { Button, Typography } from "@mui/material";
 import { getUser } from "../../features/user/userSlice";
 
 function MyTodo() {
@@ -23,6 +23,8 @@ function MyTodo() {
 
   return (
     <div className="px-5 max-w-[1440px] m-auto">
+      {/*Add Todo Modal Modal */}
+      <AddTodo isAddTodo={isAddTodo} setIsAddTodo={setIsAddTodo} />
       <Button
         sx={{ my: 5, padding: "20px 50px" }}
         variant="contained"
@@ -31,17 +33,21 @@ function MyTodo() {
       >
         Add Todo
       </Button>
+
       <Typography variant="body2" sx={{ mb: 4 }} className="text-slate-600">
         Your Todo's both public and private
       </Typography>
 
-      <AddTodo isAddTodo={isAddTodo} setIsAddTodo={setIsAddTodo} />
       {fetchStatus === "loading" ? (
         <div>Loading...</div>
       ) : fetchStatus === "error" ? (
-        <div>{fetchStatusText}</div>
+        <div>{fetchStatusText} Please Try Reloading the Page</div>
+      ) : userTodos.length > 0 ? (
+        <TodosList todos={userTodos} />
       ) : (
-        <Todos todos={userTodos} />
+        <div className="text-center text-slate-600">
+          You have no todos yet. Click on the Add Todo button to add one.
+        </div>
       )}
     </div>
   );

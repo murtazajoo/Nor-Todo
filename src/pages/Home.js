@@ -1,7 +1,7 @@
 import React from "react";
 import Landing from "../components/home/Landing";
 import { useUser } from "@supabase/auth-helpers-react";
-import MyTodo from "../components/todo/MyTodo";
+import MyTodo from "../components/home/MyTodo";
 
 function Home() {
   const user = useUser();

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button, TextField, TextareaAutosize } from "@mui/material";
-import { BasicSwitch } from "./Switch";
+import { BasicSwitch } from "../../utils/Switch";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../../features/todo/todoSlice";
 import { toast } from "react-toastify";

@@ -29,7 +29,7 @@ export const todoSlice = createSlice({
       state.statusText = action.error.message;
     });
     builder.addCase(addTodo.fulfilled, (state, action) => {
-      state.status = "idle";
+      state.status = "added";
       state.data.unshift(action.payload);
     });
     builder.addCase(updateTodo.pending, (state, action) => {
@@ -48,7 +48,7 @@ export const todoSlice = createSlice({
         state.data = newData;
       }
 
-      state.status = "idle";
+      state.status = "updated";
 
       toast.update(toastId, {
         render: "Updated Successfully",
