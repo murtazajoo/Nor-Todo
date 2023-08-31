@@ -51,7 +51,7 @@ export const todoSlice = createSlice({
       state.status = "updated";
 
       toast.update(toastId, {
-        render: "Updated Successfully",
+        render: "Synced Successfully",
         type: "success",
         isLoading: false,
         autoClose: 1000,
