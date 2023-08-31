@@ -41,7 +41,7 @@ function Navbar() {
       <ul
         className={` flex-col flex ${
           menuOpen ? "-translate-x-0 " : "  translate-x-full  "
-        }transform    duration-200 bg-slate-950  absolute w-[70vw] top-0 right-0 bottom-0 border
+        }transform    duration-200 bg-slate-950  absolute w-[70vw] top-0 right-0 bottom-0 
        z-20 sm:flex items-end text-xl px-10 sm:-translate-x-0 sm:relative sm:w-full justify-start pt-[20vh] sm:border-transparent max-w-[600px] sm:flex-row gap-10 uppercase sm:justify-evenly sm:bg-transparent sm:p-0 sm:text-sm sm:items-center flex-wrap`}
       >
         <li className="hidden sm:block">
@@ -57,7 +57,9 @@ function Navbar() {
         </button>
         <li className="sm:hidden bg-slate-800 p-1 px-2 rounded">
           {" "}
-          <NavLink to="auth/signin">Sign In</NavLink>
+          <NavLink onClick={toggleMenu} to="auth/signin">
+            Sign In
+          </NavLink>
         </li>
         <li>
           <NavLink
