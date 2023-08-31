@@ -25,6 +25,18 @@ function About() {
             <b className="text-yellow-600"> create, update, and delete </b>{" "}
             todos.
           </li>
+          {/* tell about like its a PWA and can be install on any device*/}
+          <li>
+            It is a{" "}
+            <b className="text-yellow-600">
+              {" "}
+              <span role="img" aria-label="fire">
+                🔥
+              </span>
+              Progressive Web App (PWA){" "}
+            </b>{" "}
+            and can be installed on any device.
+          </li>
           <li>
             You can also make your todos{" "}
             <b className="text-yellow-600"> public or private</b> . Public todos
