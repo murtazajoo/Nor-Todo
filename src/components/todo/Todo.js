@@ -9,11 +9,24 @@ import Reactions from "./Reactions";
 import { getUser } from "../../features/user/userSlice";
 import ReactLinkify from "react-linkify";
 import PushPinIcon from "@mui/icons-material/PushPin";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 const Todo = React.memo(({ todo, setEditTodo }) => {
   const user = useSelector(getUser);
   const dispatch = useDispatch();
   const todoRef = useRef();
+
+  function toggleFav() {
+    dispatch(
+      updateTodo({
+        ...todo,
+        fav: todo.fav.includes(user.id)
+          ? todo.fav.filter((id) => id !== user.id)
+          : [user.id, ...todo.fav],
+      })
+    );
+  }
 
   function toggleCompeleted(todo) {
     dispatch(
@@ -58,7 +71,10 @@ const Todo = React.memo(({ todo, setEditTodo }) => {
           variant="body2"
           className="max-h-[200px] overflow-auto todo-scrollbar pr-1 text-md description whitespace-pre-wrap w-100%  text-slate-400 break-words "
         >
-          <ReactLinkify className="whitespace-pre">
+          <ReactLinkify
+            componentDecorator={componentDecorator}
+            className="whitespace-pre"
+          >
             {todo.body
               .split("\n")
               .filter((line) => line.trim() !== "")
@@ -72,6 +88,18 @@ const Todo = React.memo(({ todo, setEditTodo }) => {
         />
         <div className="flex justify-between items-center w-full">
           <Box>
+            {todo.fav.includes(user.id) ? (
+              <BookmarkIcon
+                onClick={toggleFav}
+                sx={{ cursor: "pointer", color: "#379aff", ml: 2 }}
+              />
+            ) : (
+              <BookmarkBorderIcon
+                onClick={toggleFav}
+                sx={{ cursor: "pointer", color: "#379aff", ml: 2 }}
+              />
+            )}
+
             <Typography variant="body2" className="text-sm text-slate-600">
               {new Date(todo.created_at).toLocaleDateString()}
             </Typography>
@@ -121,4 +149,10 @@ const TailWindBgRandomClasses = [
   "bg-amber-800",
   "bg-emerald-800",
 ];
+
+const componentDecorator = (href, text, key) => (
+  <a href={href} key={key} rel="noreferrer" target="_blank">
+    {text}
+  </a>
+);
 export default Todo;

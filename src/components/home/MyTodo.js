@@ -4,22 +4,26 @@ import { selectTodos } from "../../features/todo/todoSlice";
 import AddTodo from "../todo/AddTodo";
 
 import TodosList from "../todo/TodosList";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Switch, Typography } from "@mui/material";
 import { getUser } from "../../features/user/userSlice";
 
 function MyTodo() {
   const [isAddTodo, setIsAddTodo] = useState(false);
   const user = useSelector(getUser);
+  const [fav, setfav] = useState(false);
   const {
     status: fetchStatus,
     statusText: fetchStatusText,
     data: todos,
   } = useSelector(selectTodos);
 
-  const userTodos = useMemo(
-    () => todos.filter((todo) => todo.user_id === user.id),
-    [user, todos]
-  );
+  const userTodos = todos.filter((todo) => {
+    if (fav) {
+      return todo.fav.includes(user.id);
+    } else {
+      return todo.user_id === user.id;
+    }
+  });
 
   return (
     <div className="px-5 max-w-[1440px] m-auto">
@@ -38,6 +42,10 @@ function MyTodo() {
         Your Todo's both public and private
       </Typography>
 
+      <div className="bg-slate-800 px-5 rounded-full mb-5 flex justify-evenly items-center w-fit">
+        Favorite Todo
+        <Switch onClick={() => setfav(!fav)} />
+      </div>
       {fetchStatus === "loading" ? (
         <div>Loading...</div>
       ) : fetchStatus === "error" ? (

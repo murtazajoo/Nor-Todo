@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TbLogicNor } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { Avatar, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { getUser } from "../features/user/userSlice";
@@ -10,7 +10,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import AppInstall from "./AppInstall";
 
 function Navbar() {
-  const user = useSelector(getUser);
+  const user = useUser();
   const supabase = useSupabaseClient();
   const [menuOpen, setMenuOpen] = useState(false);
 
