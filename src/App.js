@@ -3,7 +3,6 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
 import store from "./app/store";
 import { fetchTodos, selectTodos } from "./features/todo/todoSlice";
 import { fetchUser } from "./features/user/userSlice";
@@ -29,20 +28,19 @@ function App() {
 
   return (
     <div className="App bg-slate-950 min-h-[100vh] text-slate-100 pb-20">
-      <header className="App-header">
+      <main className="App-header relative">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/auth/*">
             <Route path="signin" element={<SignIn />} />
-            <Route path="signup" element={<SignUp />} />
           </Route>
           <Route path="/about" element={<About />}></Route>
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </header>
+      </main>
       <ToastContainer />
       <audio ref={audioRef} className="audio-element">
         <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_6634b0add4.mp3"></source>

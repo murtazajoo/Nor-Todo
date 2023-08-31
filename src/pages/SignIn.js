@@ -29,7 +29,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" className="min-h-[100vh]" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
