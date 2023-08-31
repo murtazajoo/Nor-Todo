@@ -93,7 +93,7 @@ function Navbar() {
             About
           </NavLink>
         </li>
-        <li>
+        <li className="sm:hidden">
           <AppInstall />
         </li>
       </ul>
