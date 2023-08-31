@@ -55,12 +55,13 @@ function Navbar() {
             <ClearOutlinedIcon />
           </button>
         </button>
-        <li className="sm:hidden bg-slate-800 p-1 px-2 rounded">
-          {" "}
-          <NavLink onClick={toggleMenu} to="auth/signin">
-            Sign In
-          </NavLink>
-        </li>
+        {user && (
+          <li className="sm:hidden bg-slate-800 p-1 px-2 rounded">
+            <NavLink onClick={toggleMenu} to="auth/signin">
+              Sign In
+            </NavLink>
+          </li>
+        )}
         <li>
           <NavLink
             onClick={toggleMenu}
@@ -101,7 +102,7 @@ function Navbar() {
           <AppInstall />
         </li>
       </ul>
-      {user && user ? (
+      {user ? (
         <Box className="flex justify-end sm:justify-center  items-start gap-3">
           <div className="text-right">
             <p>{user.user_metadata.name}</p>
