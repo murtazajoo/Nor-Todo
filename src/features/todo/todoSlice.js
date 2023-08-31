@@ -33,7 +33,7 @@ export const todoSlice = createSlice({
       state.data.unshift(action.payload);
     });
     builder.addCase(updateTodo.pending, (state, action) => {
-      toast.loading("Updating Todo", { toastId: toastId });
+      toast.loading("Syncing Changes ", { toastId: toastId });
     });
 
     builder.addCase(updateTodo.fulfilled, (state, action) => {
