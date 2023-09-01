@@ -7,7 +7,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { BsGithub } from "react-icons/bs";
+import { BsGithub, BsGoogle } from "react-icons/bs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -21,9 +21,9 @@ const defaultTheme = createTheme({
 export default function SignIn() {
   const supabase = useSupabaseClient();
 
-  const githubSignin = async () => {
+  const Signin = async (provider) => {
     await supabase.auth.signInWithOAuth({
-      provider: "github",
+      provider: provider,
     });
   };
 
@@ -42,15 +42,9 @@ export default function SignIn() {
           <Avatar sx={{ m: 6, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography
-            class="font-display text-5xl my-10"
-            component="h1"
-            variant="h4"
-          >
-            Sign in
-          </Typography>
+
           <Button
-            onClick={githubSignin}
+            onClick={() => Signin("github")}
             variant="outlined"
             size="large"
             className="w-60 py-4"
@@ -58,8 +52,19 @@ export default function SignIn() {
             <BsGithub className="mr-4" /> Sign In With Github
           </Button>
 
-          <Typography class="font-mono text-slate-600 text-sm my-10">
-            You can Only Sign Ip with a
+          <Button
+            onClick={() => Signin("google")}
+            variant="outlined"
+            size="large"
+            sx={{ my: 2 }}
+            color="secondary"
+            className="w-60 py-4 text-orange-300"
+          >
+            <BsGoogle className="mr-4" /> Sign In With Google
+          </Button>
+
+          <Typography className="font-mono pt-5 text-slate-600 text-sm my-10">
+            You can Only Sign In with a
             <a
               href="https://github.com"
               target="_blank"
@@ -68,6 +73,16 @@ export default function SignIn() {
             >
               {" "}
               Github
+            </a>{" "}
+            or
+            <a
+              href="https://google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sky-600 "
+            >
+              {" "}
+              Google
             </a>{" "}
             Account.
           </Typography>

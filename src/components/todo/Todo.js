@@ -54,12 +54,6 @@ const Todo = React.memo(({ todo, setEditTodo }) => {
         className={` ${TailWindBgRandomClasses[index]} swing-bottom-right-bck bg-opacity-40 rounded-2xl p-5 h-fit`}
         key={todo.id}
       >
-        {todo.id === 59 && (
-          <div className="absolute bg-rose-800 px-2 pr-4 uppercase rounded-full top-0 left-1/2 transform -rotate-[0deg] -translate-x-1/2 -translate-y-1/2">
-            <PushPinIcon sx={{ color: "#379aff" }} /> pinned
-          </div>
-        )}
-
         <Typography
           variant="h4"
           className="whitespace-wrap break-words"
@@ -88,17 +82,18 @@ const Todo = React.memo(({ todo, setEditTodo }) => {
         />
         <div className="flex justify-between items-center w-full">
           <Box>
-            {todo.fav.includes(user.id) ? (
-              <BookmarkIcon
-                onClick={toggleFav}
-                sx={{ cursor: "pointer", color: "#379aff", ml: 2 }}
-              />
-            ) : (
-              <BookmarkBorderIcon
-                onClick={toggleFav}
-                sx={{ cursor: "pointer", color: "#379aff", ml: 2 }}
-              />
-            )}
+            {user &&
+              (todo.fav.includes(user?.id) ? (
+                <BookmarkIcon
+                  onClick={toggleFav}
+                  sx={{ cursor: "pointer", color: "#379aff", ml: 2 }}
+                />
+              ) : (
+                <BookmarkBorderIcon
+                  onClick={toggleFav}
+                  sx={{ cursor: "pointer", color: "#379aff", ml: 2 }}
+                />
+              ))}
 
             <Typography variant="body2" className="text-sm text-slate-600">
               {new Date(todo.created_at).toLocaleDateString()}

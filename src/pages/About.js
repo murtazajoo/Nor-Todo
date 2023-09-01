@@ -61,29 +61,6 @@ function About() {
           </li>
         </ul>
       </Typography>
-      {/* Its an openSoyrce Project feel free to contribute */}
-      <Typography variant="h3" sx={{ mb: 4 }} className="text-amber-200">
-        Contributing
-      </Typography>
-      <Typography variant="h6" sx={{ mb: 4 }} className="text-sky-200">
-        <ul>
-          <li>
-            This is an open source project. Feel free to contribute to it.
-          </li>
-          <li>
-            You can find the source code on{" "}
-            <a
-              className="text-sky-500 hover:text-sky-200 underline"
-              href=" https://github.com/murtazajoo/nor-todo"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Github Repo
-            </a>
-          </li>
-          <li>You can also report bugs and request features on Github.</li>
-        </ul>
-      </Typography>
 
       <Typography variant="h5" sx={{ mb: 1 }} className="text-amber-200">
         How to use ?

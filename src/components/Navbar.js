@@ -41,25 +41,40 @@ function Navbar() {
       <ul
         className={` flex-col flex ${
           menuOpen ? "-translate-x-0 " : "  translate-x-full  "
-        }transform    duration-200 bg-slate-950  absolute w-[70vw] top-0 right-0 bottom-0 
-       z-20 sm:flex items-end text-xl px-10 sm:-translate-x-0 sm:relative sm:w-full justify-start pt-[20vh] sm:border-transparent max-w-[600px] sm:flex-row gap-10 uppercase sm:justify-evenly sm:bg-transparent sm:p-0 sm:text-sm sm:items-center flex-wrap`}
+        }transform min-h-[100vh]  duration-200 bg-slate-950  absolute w-[90vw] top-0 right-0 bottom-0 
+       z-20 sm:min-h-full    sm:flex items-end text-xl px-10 sm:-translate-x-0 sm:relative sm:w-full justify-start pt-[10vh] sm:border-transparent max-w-[600px] sm:flex-row gap-10 uppercase sm:justify-evenly sm:bg-transparent sm:p-0 sm:text-sm sm:items-center flex-wrap`}
       >
         <li className="hidden sm:block">
           <TbLogicNor size={30} />
         </li>
-        <button
-          onClick={toggleMenu}
-          className="sm:hidden absolute top-5 right-5"
-        >
-          <button>
+        <li>
+          {" "}
+          <button
+            onClick={toggleMenu}
+            className="sm:hidden absolute top-5 right-5"
+          >
             <ClearOutlinedIcon />
           </button>
-        </button>
-        {user && (
-          <li className="sm:hidden bg-slate-800 p-1 px-2 rounded">
-            <NavLink onClick={toggleMenu} to="auth/signin">
-              Sign In
-            </NavLink>
+        </li>
+        {user ? (
+          <li>
+            <Box className=" flex  sm:hidden justify-end sm:justify-center  items-start gap-3">
+              <div className="text-right">
+                <p>{user.user_metadata.name}</p>
+                <p className="text-sm text-slate-600">
+                  {user.user_metadata.email}
+                </p>
+              </div>
+              <Avatar
+                alt={user.user_metadata.name}
+                src={user.user_metadata.avatar_url}
+              />
+            </Box>
+          </li>
+        ) : (
+          <li onClick={toggleMenu} className="bg-slate-800 p-1 px-2 rounded">
+            {" "}
+            <NavLink to="auth/signin">Sign In</NavLink>
           </li>
         )}
         <li>
@@ -103,7 +118,7 @@ function Navbar() {
         </li>
       </ul>
       {user ? (
-        <Box className="flex justify-end sm:justify-center  items-start gap-3">
+        <Box className=" hidden sm:flex justify-end sm:justify-center  items-start gap-3">
           <div className="text-right">
             <p>{user.user_metadata.name}</p>
             <p className="text-sm text-slate-600">{user.user_metadata.email}</p>
@@ -114,7 +129,7 @@ function Navbar() {
           />
         </Box>
       ) : (
-        <ul className="flex gap-5  justify-between items-center">
+        <ul className=" gap-5 hidden sm:flex justify-between items-center">
           <li className="bg-slate-800 p-1 px-2 rounded">
             {" "}
             <NavLink to="auth/signin">Sign In</NavLink>
